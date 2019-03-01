@@ -3,7 +3,7 @@
   "info": {
     "description": "เซอร์วิสสำหรับการแจ้งเตือนไปยัง IntaniaBuddy Mobile Application แจ้งเตือนแบบ Remote Push.",
     "version": "1.0.0",
-    "title": "Push Notification Services",
+    "title": "ECS APIs Documentation",
     "termsOfService": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend",
     "contact": {
       "email": "apiteam@swagger.io"
