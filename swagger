@@ -16,7 +16,163 @@
   "host": "apis.eng.psu.ac.th",
   "basePath": "/v1",
   "tags": [{
+  "swagger": "2.0",{
   "swagger": "2.0",
+  "info": {
+    "description": "กลุ่มของเซอร์วิสสำหรับบริการเสริมช่วยอำนวยความสะดวกให้กับแอพพลิเคชั่น เช่น บริการเอกสาร PDF, Email, Notification, QR-Code Generator เป็นต้น",
+    "version": "1.0.0",
+    "title": "ECS APIs Documentation",
+    "termsOfService": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "apis.eng.psu.ac.th",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "ConfirmSend",
+      "description": "ตรวจสอบจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งไปได้",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend"
+      }
+    },
+    {
+      "name": "Email Service",
+      "description": "",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend"
+      }
+    },
+    {
+      "name": "PDF Service",
+      "description": "",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend"
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/ConfirmSend": {
+      "post": {
+        "tags": [
+          "ConfirmSend"
+        ],
+        "summary": "",
+        "description": "ตรวจสอบจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งไปได้",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfirmSend"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer_Token": [
+              "write:ConfirmSend",
+              "read:ConfirmSend"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer_Token": {
+      "type": "oauth2",
+      "authorizationUrl": "http://Bearer_Token.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:ConfirmSend": "modify ConfirmSend in your account",
+        "read:ConfirmSend": "read your ConfirmSend"
+      }
+    }
+  },
+  "definitions": {
+    "ConfirmSend": {
+      "type": "object",
+      "properties": {
+        "headings": {
+          "type": "string",
+          "description": "ชื่อหัวเรื่องการส่ง"
+        },
+        "contents": {
+          "type": "string",
+          "description": "เนื้ออธิบายรายละเอียดของหัวเรื่อง"
+        },
+        "url": {
+          "type": "string",
+          "description": "link url ที่เกี่ยวข้องกับข้อความเมื่อผู็รับเปิดอ่านข้อความ ใส่ค่าว่างได้หากไม่มี link"
+        },
+        "std_code": {
+          "type": "string",
+          "description": "รหัสนักศึกษา 13 หลัก ใส่ค่า null หากไม่กำหนด"
+        },
+        "dept_id": {
+          "type": "string",
+          "description": "รหัสภาควิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "major_id": {
+          "type": "string",
+          "description": "รหัสสาขาวิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "year_status": {
+          "type": "string",
+          "description": "ชั้นปีที่เรียน เช่น 1 หมายถึงปีที่ 1 ใส่ค่า null หากไม่กำหนด"
+        },
+        "subj_id": {
+          "type": "string",
+          "description": "รหัสวิชา เช่น 200-201 กำหนดได้เพียง 1 วิชา"
+        },
+        "section": {
+          "type": "string",
+          "description": "ตอนของการลงทะเบียน เช่น 01 หมายถึง ตอน 01"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
   "info": {
     "description": "กลุ่มของเซอร์วิสสำหรับบริการเสริมช่วยอำนวยความสะดวกให้กับแอพพลิเคชั่น เช่น บริการเอกสาร PDF, Email, Notification, QR-Code Generator เป็นต้น",
     "version": "1.0.0",
