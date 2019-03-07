@@ -247,6 +247,51 @@
           }
         }
       }
+    },
+    "/requestTopup": {
+      "post": {
+        "tags": [
+          "requestTopup"
+        ],
+        "summary": "",
+        "description": "ร้องขอการเติมโควตาเพิ่มสำหรับการส่งแจ้งเตือน",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/requestTopup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded!"
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -320,7 +365,7 @@
     "initLimitsend": {
       "type": "object",
       "properties": {
-        "id": {
+        "topup": {
           "example": 1,
           "description": "รหัสของโควต้า"
         },
@@ -351,6 +396,16 @@
         "is_topuped": {
           "example": 0,
           "description": "สถานะการขอ 0 = ไม่ขอ, 1 = ขอสำเร็จ"
+        }
+      }
+    },
+    "requestTopup": {
+      "type": "object",
+      "properties": {
+        "topup": {
+          "type": "integer",
+          "example": 200,
+          "description": "จำนวนที่ต้องการ"
         }
       }
     },
