@@ -357,6 +357,44 @@
           }
         }
       }
+    },
+    "/delivery": {
+      "get": {
+        "tags": [
+          "delivery"
+        ],
+        "summary": "",
+        "description": "ประวัติรายการที่ได้ส่งข้อความแจ้งเตือนไปแล้ว",
+        "operationId": "finddeliveryByStatus",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/delivery"
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -492,28 +530,28 @@
         "std_code": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "รหัสนักศึกษา 13 หลัก ใส่ค่า null หากไม่กำหนด"
         },
         "dept_id": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "รหัสภาควิชา ใส่ค่า null หากไม่กำหนด"
         },
         "major_id": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "รหัสสาขาวิชา ใส่ค่า null หากไม่กำหนด"
         },
         "year_status": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "ชั้นปีที่เรียน เช่น 1 หมายถึงปีที่ 1 ใส่ค่า null หากไม่กำหนด"
         },
@@ -524,9 +562,54 @@
         "section": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "ตอนของการลงทะเบียน เช่น 01 หมายถึง ตอน 01"
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "notification_id": {
+          "type": "string",
+          "description": "ID ของการส่งแจ้งเตือน"
+        },
+        "player_id": {
+          "type": "string",
+          "description": "ID ของอุปกรณ์ที่ใช้ในการรับ"
+        },
+        "recipient_user": {
+          "type": "string",
+          "description": "Username ของผู้รับ"
+        },
+        "read_status": {
+          "type": "string",
+          "description": "สถานการณ์อ่าน 0=ยังไม่อ่าน 1=อ่านแล้ว"
+        },
+        "app_name": {
+          "type": "string",
+          "description": "ชื่อของแอพพลิเคชั่นที่ใช้"
+        },
+        "sender_name": {
+          "type": "string",
+          "description": "ชื่อของผู้ส่ง"
+        },
+        "time_stamp": {
+          "type": "string",
+          "description": "ประทับเวลาแบบ unix time"
+        },
+        "heading": {
+          "type": "string",
+          "description": "ชื่อของหัวเรื่อง"
+        },
+        "content": {
+          "type": "string",
+          "description": "รายละเอียดของข้อความที่ส่ง"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
         }
       }
     },
