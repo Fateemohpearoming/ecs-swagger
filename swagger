@@ -536,6 +536,57 @@
           }
         }
       }
+    },
+    "/dailiesSendTimes": {
+      "get": {
+        "tags": [
+          "dailiesSendTimes"
+        ],
+        "summary": "",
+        "description": "รายงานการส่งเตือนประจำวัน",
+        "operationId": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "properties": {
+                "heading": {
+                  "type": "string",
+                  "description": "ชื่อของหัวเรื่อง"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "รายละเอียดของข้อความที่ส่ง"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+                },
+                "sender_name": {
+                  "type": "string",
+                  "description": "ชื่อของผู้ส่ง"
+                },
+                "time_stamp": {
+                  "type": "string",
+                  "description": "ประทับเวลาแบบ unix time"
+                },
+                "total_forced_recipients": {
+                  "type": "string",
+                  "description": "จำนวนทั้งหมดที่ส่งถึงผู้รับ"
+                },
+                "total_messageable_recipients": {
+                  "example": 4,
+                  "type": "string",
+                  "description": "จำนวนทั้งหมดที่สามารถส่งได้"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -812,6 +863,40 @@
         "device_model": {
           "type": "string",
           "description": "ชื่อของโมเดลอุปกรณ์"
+        }
+      }
+    },
+    "dailiesSendTimes": {
+      "type": "object",
+      "properties": {
+        "heading": {
+          "type": "string",
+          "description": "ชื่อของหัวเรื่อง"
+        },
+        "content": {
+          "type": "string",
+          "description": "รายละเอียดของข้อความที่ส่ง"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+        },
+        "sender_name": {
+          "type": "string",
+          "description": "ชื่อของผู้ส่ง"
+        },
+        "time_stamp": {
+          "type": "string",
+          "description": "ประทับเวลาแบบ unix time"
+        },
+        "total_forced_recipients": {
+          "type": "string",
+          "description": "จำนวนทั้งหมดที่ส่งถึงผู้รับ"
+        },
+        "total_messageable_recipients": {
+          "example": 4,
+          "type": "string",
+          "description": "จำนวนทั้งหมดที่สามารถส่งได้"
         }
       }
     },
