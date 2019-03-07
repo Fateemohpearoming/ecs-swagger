@@ -389,28 +389,28 @@
         "std_code": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "รหัสนักศึกษา 13 หลัก ใส่ค่า null หากไม่กำหนด"
         },
         "dept_id": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "รหัสภาควิชา ใส่ค่า null หากไม่กำหนด"
         },
         "major_id": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "รหัสสาขาวิชา ใส่ค่า null หากไม่กำหนด"
         },
         "year_status": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "ชั้นปีที่เรียน เช่น 1 หมายถึงปีที่ 1 ใส่ค่า null หากไม่กำหนด"
         },
@@ -421,7 +421,7 @@
         "section": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfirmSend"
+            "$ref": ""
           },
           "description": "ตอนของการลงทะเบียน เช่น 01 หมายถึง ตอน 01"
         }
