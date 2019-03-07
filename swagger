@@ -25,6 +25,54 @@
       }
     },
     {
+      "name": "initLimitsend",
+      "description": "สร้างและปรับปรุงโควตาสำหรับจำกัดการส่งข้อความ ค่าเริ่มต้น 1000 Recipient / ผู้ใช้ / เทอม",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/initLimitsend"
+      }
+    },
+    {
+      "name": "requestTopup",
+      "description": "ร้องขอการเติมโควตาเพิ่มสำหรับการส่งแจ้งเตือน",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/requestTopup"
+      }
+    },
+    {
+      "name": "Send",
+      "description": "ส่งข้อความแจ้งเตือนไปยัง Intania Buddy Mobile Application",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/Send"
+      }
+    },
+    {
+      "name": "delivery",
+      "description": "ประวัติรายการที่ได้ส่งข้อความแจ้งเตือนไปแล้ว",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/delivery"
+      }
+    },
+    {
+      "name": "deliveries",
+      "description": "ประวัติรายการผู้รับการแจ้งเตือน",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/deliveries"
+      }
+    },
+    {
+      "name": "dailiesSendTimes",
+      "description": "รายงานการส่งแจ้งเตือนประจำวัน",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/dailiesSendTimes"
+      }
+    },
+    {
       "name": "Email Service",
       "description": "",
       "externalDocs": {
@@ -117,6 +165,88 @@
           }
         ]
       }
+    },
+    "/initLimitsend": {
+      "post": {
+        "tags": [
+          "initLimitsend"
+        ],
+        "summary": "",
+        "description": "สร้างและปรับปรุงโควตาสำหรับจำกัดการส่งข้อความ ค่าเริ่มต้น 1000 Recipient / ผู้ใช้ / เทอม",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/initLimitsend"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": 1,
+                  "description": "รหัสของโควต้า"
+                },
+                "edu_term": {
+                  "example": 2,
+                  "description": "เทอม 1,2"
+                },
+                "edu_year": {
+                  "example": 2561,
+                  "description": "ปีการศึกษา"
+                },
+                "sender_username": {
+                  "example": "thawat.va",
+                  "description": "ชื่อผู้ใช้งานระบบ"
+                },
+                "limit": {
+                  "example": 1000,
+                  "description": "จำนวนโควตาที่จำกัดไว้เริ่มต้น"
+                },
+                "current_used": {
+                  "example": 0,
+                  "description": "จำนวนที่ใช้ไป"
+                },
+                "top_up": {
+                  "example": 0,
+                  "description": "จำนวนที่ขอโควต้าเพิ่ม"
+                },
+                "is_topuped": {
+                  "example": 0,
+                  "description": "สถานะการขอ 0 = ไม่ขอ, 1 = ขอสำเร็จ"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -184,6 +314,58 @@
             "$ref": "#/definitions/ConfirmSend"
           },
           "description": "ตอนของการลงทะเบียน เช่น 01 หมายถึง ตอน 01"
+        }
+      }
+    },
+    "initLimitsend": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "example": 1,
+          "description": "รหัสของโควต้า"
+        },
+        "edu_term": {
+          "example": 2,
+          "description": "เทอม 1,2"
+        },
+        "edu_year": {
+          "example": 2561,
+          "description": "ปีการศึกษา"
+        },
+        "sender_username": {
+          "example": "thawat.va",
+          "description": "ชื่อผู้ใช้งานระบบ"
+        },
+        "limit": {
+          "example": 1000,
+          "description": "จำนวนโควตาที่จำกัดไว้เริ่มต้น"
+        },
+        "current_used": {
+          "example": 0,
+          "description": "จำนวนที่ใช้ไป"
+        },
+        "top_up": {
+          "example": 0,
+          "description": "จำนวนที่ขอโควต้าเพิ่ม"
+        },
+        "is_topuped": {
+          "example": 0,
+          "description": "สถานะการขอ 0 = ไม่ขอ, 1 = ขอสำเร็จ"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
         }
       }
     }
