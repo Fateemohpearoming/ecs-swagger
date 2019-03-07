@@ -292,6 +292,71 @@
           }
         }
       }
+    },
+    "/Send": {
+      "post": {
+        "tags": [
+          "Send"
+        ],
+        "summary": "",
+        "description": "ส่งข้อความแจ้งเตือนไปยัง Intania Buddy Mobile Application",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Send"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_forced_recipients": {
+                  "example": 1214,
+                  "type": "integer"
+                },
+                "total_messageable_recipients": {
+                  "example": 738,
+                  "type": "integer"
+                },
+                "recipients": {
+                  "type": "array",
+                  "example": [],
+                  "items": {
+                    "$ref": ""
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -406,6 +471,62 @@
           "type": "integer",
           "example": 200,
           "description": "จำนวนที่ต้องการ"
+        }
+      }
+    },
+    "Send": {
+      "type": "object",
+      "properties": {
+        "headings": {
+          "type": "string",
+          "description": "ชื่อหัวเรื่องการส่ง"
+        },
+        "contents": {
+          "type": "string",
+          "description": "เนื้ออธิบายรายละเอียดของหัวเรื่อง"
+        },
+        "url": {
+          "type": "string",
+          "description": "link url ที่เกี่ยวข้องกับข้อความเมื่อผู็รับเปิดอ่านข้อความ ใส่ค่าว่างได้หากไม่มี link"
+        },
+        "std_code": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfirmSend"
+          },
+          "description": "รหัสนักศึกษา 13 หลัก ใส่ค่า null หากไม่กำหนด"
+        },
+        "dept_id": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfirmSend"
+          },
+          "description": "รหัสภาควิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "major_id": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfirmSend"
+          },
+          "description": "รหัสสาขาวิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "year_status": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfirmSend"
+          },
+          "description": "ชั้นปีที่เรียน เช่น 1 หมายถึงปีที่ 1 ใส่ค่า null หากไม่กำหนด"
+        },
+        "subj_id": {
+          "type": "string",
+          "description": "รหัสวิชา เช่น 200-201 กำหนดได้เพียง 1 วิชา"
+        },
+        "section": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfirmSend"
+          },
+          "description": "ตอนของการลงทะเบียน เช่น 01 หมายถึง ตอน 01"
         }
       }
     },
