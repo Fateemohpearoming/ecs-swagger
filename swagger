@@ -15,7 +15,929 @@
   },
   "host": "apis.eng.psu.ac.th",
   "basePath": "/v1",
+  "tags": [{
+  "swagger": "2.0",
+  "info": {
+    "description": "กลุ่มของเซอร์วิสสำหรับบริการเสริมช่วยอำนวยความสะดวกให้กับแอพพลิเคชั่น เช่น บริการเอกสาร PDF, Email, Notification, QR-Code Generator เป็นต้น",
+    "version": "1.0.0",
+    "title": "ECS APIs Documentation",
+    "termsOfService": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "apis.eng.psu.ac.th",
+  "basePath": "/v1",
   "tags": [
+    {
+      "name": "ConfirmSend",
+      "description": "ตรวจสอบจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งไปได้",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend"
+      }
+    },
+    {
+      "name": "initLimitsend",
+      "description": "สร้างและปรับปรุงโควตาสำหรับจำกัดการส่งข้อความ ค่าเริ่มต้น 1000 Recipient / ผู้ใช้ / เทอม",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/initLimitsend"
+      }
+    },
+    {
+      "name": "requestTopup",
+      "description": "ร้องขอการเติมโควตาเพิ่มสำหรับการส่งแจ้งเตือน",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/requestTopup"
+      }
+    },
+    {
+      "name": "Send",
+      "description": "ส่งข้อความแจ้งเตือนไปยัง Intania Buddy Mobile Application",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/Send"
+      }
+    },
+    {
+      "name": "delivery",
+      "description": "ประวัติรายการที่ได้ส่งข้อความแจ้งเตือนไปแล้ว",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/delivery"
+      }
+    },
+    {
+      "name": "deliveries",
+      "description": "ประวัติรายการผู้รับการแจ้งเตือน",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/deliveries"
+      }
+    },
+    {
+      "name": "dailiesSendTimes",
+      "description": "รายงานการส่งแจ้งเตือนประจำวัน",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/dailiesSendTimes"
+      }
+    },
+    {
+      "name": "Email Service",
+      "description": "",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/"
+      }
+    },
+    {
+      "name": "PDF Service",
+      "description": "",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://apis.eng.psu.ac.th/asset/notification/v1/"
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/ConfirmSend": {
+      "post": {
+        "tags": [
+          "ConfirmSend"
+        ],
+        "summary": "",
+        "description": "ยืนยันจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งได้",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfirmSend"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_forced_recipients": {
+                  "example": 1214,
+                  "type": "integer"
+                },
+                "total_messageable_recipients": {
+                  "example": 738,
+                  "type": "integer"
+                },
+                "recipients": {
+                  "type": "array",
+                  "example": [],
+                  "items": {
+                    "$ref": ""
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer_Token": [
+              "write:ConfirmSend",
+              "read:ConfirmSend"
+            ]
+          }
+        ]
+      }
+    },
+    "/initLimitsend": {
+      "post": {
+        "tags": [
+          "initLimitsend"
+        ],
+        "summary": "",
+        "description": "สร้างและปรับปรุงโควตาสำหรับจำกัดการส่งข้อความ ค่าเริ่มต้น 1000 Recipient / ผู้ใช้ / เทอม",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/initLimitsend"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": 1,
+                  "description": "รหัสของโควต้า"
+                },
+                "edu_term": {
+                  "example": 2,
+                  "description": "เทอม 1,2"
+                },
+                "edu_year": {
+                  "example": 2561,
+                  "description": "ปีการศึกษา"
+                },
+                "sender_username": {
+                  "example": "thawat.va",
+                  "description": "ชื่อผู้ใช้งานระบบ"
+                },
+                "limit": {
+                  "example": 1000,
+                  "description": "จำนวนโควตาที่จำกัดไว้เริ่มต้น"
+                },
+                "current_used": {
+                  "example": 0,
+                  "description": "จำนวนที่ใช้ไป"
+                },
+                "top_up": {
+                  "example": 0,
+                  "description": "จำนวนที่ขอโควต้าเพิ่ม"
+                },
+                "is_topuped": {
+                  "example": 0,
+                  "description": "สถานะการขอ 0 = ไม่ขอ, 1 = ขอสำเร็จ"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requestTopup": {
+      "post": {
+        "tags": [
+          "requestTopup"
+        ],
+        "summary": "",
+        "description": "ร้องขอการเติมโควตาเพิ่มสำหรับการส่งแจ้งเตือน",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/requestTopup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeeded!"
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Send": {
+      "post": {
+        "tags": [
+          "Send"
+        ],
+        "summary": "",
+        "description": "ส่งข้อความแจ้งเตือนไปยัง Intania Buddy Mobile Application",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Send"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_forced_recipients": {
+                  "example": 1214,
+                  "type": "integer"
+                },
+                "total_messageable_recipients": {
+                  "example": 738,
+                  "type": "integer"
+                },
+                "recipients": {
+                  "type": "array",
+                  "example": [],
+                  "items": {
+                    "$ref": ""
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delivery": {
+      "get": {
+        "tags": [
+          "delivery"
+        ],
+        "summary": "",
+        "description": "ประวัติรายการที่ได้ส่งข้อความแจ้งเตือนไปแล้ว",
+        "operationId": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "notification_id": {
+                  "type": "string",
+                  "description": "ID ของการส่งแจ้งเตือน"
+                },
+                "player_id": {
+                  "type": "string",
+                  "description": "ID ของอุปกรณ์ที่ใช้ในการรับ"
+                },
+                "recipient_user": {
+                  "type": "string",
+                  "description": "Username ของผู้รับ"
+                },
+                "read_status": {
+                  "type": "string",
+                  "description": "สถานการณ์อ่าน 0=ยังไม่อ่าน 1=อ่านแล้ว"
+                },
+                "app_name": {
+                  "type": "string",
+                  "description": "ชื่อของแอพพลิเคชั่นที่ใช้"
+                },
+                "sender_name": {
+                  "type": "string",
+                  "description": "ชื่อของผู้ส่ง"
+                },
+                "time_stamp": {
+                  "type": "string",
+                  "description": "ประทับเวลาแบบ unix time"
+                },
+                "heading": {
+                  "type": "string",
+                  "description": "ชื่อของหัวเรื่อง"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "รายละเอียดของข้อความที่ส่ง"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deliveries": {
+      "get": {
+        "tags": [
+          "deliveries"
+        ],
+        "summary": "",
+        "description": "ประวัติรายการผู้รับการแจ้งเตือน",
+        "operationId": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "notification_id",
+            "in": "query",
+            "description": "ID ของการส่งแจ้งเตือน",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "player_id": {
+                  "type": "string",
+                  "description": "ID ของอุปกรณ์ที่ใช้ในการรับ"
+                },
+                "recipient_user": {
+                  "type": "string",
+                  "description": "Username ของผู้รับ"
+                },
+                "first_name": {
+                  "type": "string",
+                  "description": "ชื่อของผู้รับ"
+                },
+                "last_name": {
+                  "type": "string",
+                  "description": "นามสกุลของผู้รับ"
+                },
+                "sender_name": {
+                  "type": "string",
+                  "description": "ชื่อของผู้ส่ง"
+                },
+                "time_stamp": {
+                  "type": "string",
+                  "description": "ประทับเวลาแบบ unix time"
+                },
+                "heading": {
+                  "type": "string",
+                  "description": "ชื่อของหัวเรื่อง"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "รายละเอียดของข้อความที่ส่ง"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+                },
+                "read_status": {
+                  "type": "string",
+                  "description": "สถานการณ์อ่าน 0=ยังไม่อ่าน 1=อ่านแล้ว"
+                },
+                "app_name": {
+                  "type": "string",
+                  "description": "ชื่อของแอพพลิเคชั่นที่ใช้"
+                },
+                "device_os": {
+                  "type": "string",
+                  "description": "หมายเลข vertion ของระบบปฏิบัติการ"
+                },
+                "device_type": {
+                  "type": "string",
+                  "description": "ชื่อของระบบปฏิบัติการที่ใช้ Android , ios"
+                },
+                "device_model": {
+                  "type": "string",
+                  "description": "ชื่อของโมเดลอุปกรณ์"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token หมดอายุ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "example": "invalid_token"
+                },
+                "error_description": {
+                  "example": "The access token provided is invalid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dailiesSendTimes": {
+      "get": {
+        "tags": [
+          "dailiesSendTimes"
+        ],
+        "summary": "",
+        "description": "รายงานการส่งเตือนประจำวัน",
+        "operationId": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "properties": {
+                "heading": {
+                  "type": "string",
+                  "description": "ชื่อของหัวเรื่อง"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "รายละเอียดของข้อความที่ส่ง"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+                },
+                "sender_name": {
+                  "type": "string",
+                  "description": "ชื่อของผู้ส่ง"
+                },
+                "time_stamp": {
+                  "type": "string",
+                  "description": "ประทับเวลาแบบ unix time"
+                },
+                "total_forced_recipients": {
+                  "type": "string",
+                  "description": "จำนวนทั้งหมดที่ส่งถึงผู้รับ"
+                },
+                "total_messageable_recipients": {
+                  "example": 4,
+                  "type": "string",
+                  "description": "จำนวนทั้งหมดที่สามารถส่งได้"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer_Token": {
+      "type": "oauth2",
+      "authorizationUrl": "http://Bearer_Token.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:ConfirmSend": "modify ConfirmSend in your account",
+        "read:ConfirmSend": "read your ConfirmSend"
+      }
+    }
+  },
+  "definitions": {
+    "ConfirmSend": {
+      "type": "object",
+      "properties": {
+        "headings": {
+          "type": "string",
+          "description": "ชื่อหัวเรื่องการส่ง"
+        },
+        "contents": {
+          "type": "string",
+          "description": "เนื้ออธิบายรายละเอียดของหัวเรื่อง"
+        },
+        "url": {
+          "type": "string",
+          "description": "link url ที่เกี่ยวข้องกับข้อความเมื่อผู็รับเปิดอ่านข้อความ ใส่ค่าว่างได้หากไม่มี link"
+        },
+        "std_code": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "รหัสนักศึกษา 13 หลัก ใส่ค่า null หากไม่กำหนด"
+        },
+        "dept_id": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "รหัสภาควิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "major_id": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "รหัสสาขาวิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "year_status": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "ชั้นปีที่เรียน เช่น 1 หมายถึงปีที่ 1 ใส่ค่า null หากไม่กำหนด"
+        },
+        "subj_id": {
+          "type": "string",
+          "description": "รหัสวิชา เช่น 200-201 กำหนดได้เพียง 1 วิชา"
+        },
+        "section": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "ตอนของการลงทะเบียน เช่น 01 หมายถึง ตอน 01"
+        }
+      }
+    },
+    "initLimitsend": {
+      "type": "object",
+      "properties": {
+        "topup": {
+          "example": 1,
+          "description": "รหัสของโควต้า"
+        },
+        "edu_term": {
+          "example": 2,
+          "description": "เทอม 1,2"
+        },
+        "edu_year": {
+          "example": 2561,
+          "description": "ปีการศึกษา"
+        },
+        "sender_username": {
+          "example": "thawat.va",
+          "description": "ชื่อผู้ใช้งานระบบ"
+        },
+        "limit": {
+          "example": 1000,
+          "description": "จำนวนโควตาที่จำกัดไว้เริ่มต้น"
+        },
+        "current_used": {
+          "example": 0,
+          "description": "จำนวนที่ใช้ไป"
+        },
+        "top_up": {
+          "example": 0,
+          "description": "จำนวนที่ขอโควต้าเพิ่ม"
+        },
+        "is_topuped": {
+          "example": 0,
+          "description": "สถานะการขอ 0 = ไม่ขอ, 1 = ขอสำเร็จ"
+        }
+      }
+    },
+    "requestTopup": {
+      "type": "object",
+      "properties": {
+        "topup": {
+          "type": "integer",
+          "example": 200,
+          "description": "จำนวนที่ต้องการ"
+        }
+      }
+    },
+    "Send": {
+      "type": "object",
+      "properties": {
+        "headings": {
+          "type": "string",
+          "description": "ชื่อหัวเรื่องการส่ง"
+        },
+        "contents": {
+          "type": "string",
+          "description": "เนื้ออธิบายรายละเอียดของหัวเรื่อง"
+        },
+        "url": {
+          "type": "string",
+          "description": "link url ที่เกี่ยวข้องกับข้อความเมื่อผู็รับเปิดอ่านข้อความ ใส่ค่าว่างได้หากไม่มี link"
+        },
+        "std_code": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "รหัสนักศึกษา 13 หลัก ใส่ค่า null หากไม่กำหนด"
+        },
+        "dept_id": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "รหัสภาควิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "major_id": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "รหัสสาขาวิชา ใส่ค่า null หากไม่กำหนด"
+        },
+        "year_status": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "ชั้นปีที่เรียน เช่น 1 หมายถึงปีที่ 1 ใส่ค่า null หากไม่กำหนด"
+        },
+        "subj_id": {
+          "type": "string",
+          "description": "รหัสวิชา เช่น 200-201 กำหนดได้เพียง 1 วิชา"
+        },
+        "section": {
+          "type": "array",
+          "items": {
+            "$ref": ""
+          },
+          "description": "ตอนของการลงทะเบียน เช่น 01 หมายถึง ตอน 01"
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "properties": {
+        "notification_id": {
+          "type": "string",
+          "description": "ID ของการส่งแจ้งเตือน"
+        },
+        "player_id": {
+          "type": "string",
+          "description": "ID ของอุปกรณ์ที่ใช้ในการรับ"
+        },
+        "recipient_user": {
+          "type": "string",
+          "description": "Username ของผู้รับ"
+        },
+        "read_status": {
+          "type": "string",
+          "description": "สถานการณ์อ่าน 0=ยังไม่อ่าน 1=อ่านแล้ว"
+        },
+        "app_name": {
+          "type": "string",
+          "description": "ชื่อของแอพพลิเคชั่นที่ใช้"
+        },
+        "sender_name": {
+          "type": "string",
+          "description": "ชื่อของผู้ส่ง"
+        },
+        "time_stamp": {
+          "type": "string",
+          "description": "ประทับเวลาแบบ unix time"
+        },
+        "heading": {
+          "type": "string",
+          "description": "ชื่อของหัวเรื่อง"
+        },
+        "content": {
+          "type": "string",
+          "description": "รายละเอียดของข้อความที่ส่ง"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+        }
+      }
+    },
+    "deliveries": {
+      "type": "object",
+      "properties": {
+        "player_id": {
+          "type": "string",
+          "description": "ID ของอุปกรณ์ที่ใช้ในการรับ"
+        },
+        "recipient_user": {
+          "type": "string",
+          "description": "Username ของผู้รับ"
+        },
+        "first_name": {
+          "type": "string",
+          "description": "ชื่อของผู้รับ"
+        },
+        "last_name": {
+          "type": "string",
+          "description": "นามสกุลของผู้รับ"
+        },
+        "sender_name": {
+          "type": "string",
+          "description": "ชื่อของผู้ส่ง"
+        },
+        "time_stamp": {
+          "type": "string",
+          "description": "ประทับเวลาแบบ unix time"
+        },
+        "heading": {
+          "type": "string",
+          "description": "ชื่อของหัวเรื่อง"
+        },
+        "content": {
+          "type": "string",
+          "description": "รายละเอียดของข้อความที่ส่ง"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+        },
+        "read_status": {
+          "type": "string",
+          "description": "สถานการณ์อ่าน 0=ยังไม่อ่าน 1=อ่านแล้ว"
+        },
+        "app_name": {
+          "type": "string",
+          "description": "ชื่อของแอพพลิเคชั่นที่ใช้"
+        },
+        "device_os": {
+          "type": "string",
+          "description": "หมายเลข vertion ของระบบปฏิบัติการ"
+        },
+        "device_type": {
+          "type": "string",
+          "description": "ชื่อของระบบปฏิบัติการที่ใช้ Android , ios"
+        },
+        "device_model": {
+          "type": "string",
+          "description": "ชื่อของโมเดลอุปกรณ์"
+        }
+      }
+    },
+    "dailiesSendTimes": {
+      "type": "object",
+      "properties": {
+        "heading": {
+          "type": "string",
+          "description": "ชื่อของหัวเรื่อง"
+        },
+        "content": {
+          "type": "string",
+          "description": "รายละเอียดของข้อความที่ส่ง"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url ของ link สำหรับเข้าไปดูข้อมูลเพิ่มเติม"
+        },
+        "sender_name": {
+          "type": "string",
+          "description": "ชื่อของผู้ส่ง"
+        },
+        "time_stamp": {
+          "type": "string",
+          "description": "ประทับเวลาแบบ unix time"
+        },
+        "total_forced_recipients": {
+          "type": "string",
+          "description": "จำนวนทั้งหมดที่ส่งถึงผู้รับ"
+        },
+        "total_messageable_recipients": {
+          "example": 4,
+          "type": "string",
+          "description": "จำนวนทั้งหมดที่สามารถส่งได้"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
     {
       "name": "ConfirmSend",
       "description": "ตรวจสอบจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งไปได้",
