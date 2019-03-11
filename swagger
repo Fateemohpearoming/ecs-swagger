@@ -42,7 +42,7 @@
     },
     {
       "name": "Send",
-      "description": "ส่งข้อความแจ้งเตือนไปยัง Intania Buddy Mobile Application",
+      "description": "ส่งข้อความแจ้งเตือนไปยัง Intania Buddy Mobil App",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apis.eng.psu.ac.th/asset/notification/v1/Send"
@@ -99,7 +99,7 @@
           "ConfirmSend"
         ],
         "summary": "",
-        "description": "ตรวจสอบจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งไปได้",
+        "description": "ยืนยันจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งได้",
         "consumes": [
           "application/json"
         ],
