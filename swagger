@@ -18,7 +18,7 @@
   "tags": [
     {
       "name": "ConfirmSend",
-      "description": "ยืนยันจำนวนกลุ่มเป้าหมายและจำนวนอุปกรณ์ที่สามารถจะส่งได้",
+      "description": "ยืนยันจำนวนกลุ่มเป้าหมายและอุปกรณ์ที่สามารถจะส่งได้",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apis.eng.psu.ac.th/asset/notification/v1/confirmsend"
@@ -26,7 +26,7 @@
     },
     {
       "name": "initLimitsend",
-      "description": "สร้างและปรับปรุงโควตาสำหรับจำกัดการส่งข้อความ ค่าเริ่มต้น 1000 Recipient / ผู้ใช้ / เทอม",
+      "description": "สร้างและปรับปรุงโควตาสำหรับจำกัดการส่งข้อความ",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://apis.eng.psu.ac.th/asset/notification/v1/initLimitsend"
